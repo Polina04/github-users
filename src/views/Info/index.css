@@ -1,0 +1,5 @@
+.repo-link {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 40px;
+}

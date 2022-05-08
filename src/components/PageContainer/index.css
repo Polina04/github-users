@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.logo-text {
+  margin-left: 10px;
+}
+
+.container {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main {
+  position: relative;
+  min-height: calc(100vh - 112px);
+}
+
+.back-button {
+  margin-bottom: 30px;
+  display: block;
+}
