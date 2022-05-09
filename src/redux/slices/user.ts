@@ -19,9 +19,10 @@ const initialState: UsersState = {
 const fetchUserReducer: CaseReducer<
   UsersState,
   PayloadAction<string>
-> = state => ({
-  ...state,
+> = () => ({
+  data: null,
   isLoading: true,
+  error: null,
 });
 
 export const userSlice = createSlice({
@@ -30,12 +31,12 @@ export const userSlice = createSlice({
   reducers: {
     fetchUser: fetchUserReducer,
     fetchUserSuccess: (state, action: PayloadAction<UserDetailed>) => ({
-      ...state,
+      error: null,
       isLoading: false,
       data: action.payload,
     }),
     fetchUserError: (state, action: PayloadAction<null | string>) => ({
-      ...state,
+      data: null,
       isLoading: false,
       error: action.payload,
     }),

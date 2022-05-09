@@ -9,6 +9,7 @@ type UsersState = {
   error: null | string;
   isLoading: boolean;
   isNextPageLoading: boolean;
+  nextPageError: null | string;
 };
 
 const initialState: UsersState = {
@@ -16,26 +17,48 @@ const initialState: UsersState = {
   error: null,
   isLoading: false,
   isNextPageLoading: false,
+  nextPageError: null,
 };
 
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    fetchUsers: state => ({ ...state, isLoading: true }),
-    fetchUsersSuccess: (state, action: PayloadAction<User[]>) => ({
-      ...state,
-      isLoading: false,
-      data: [...state.data, ...action.payload],
+    fetchUsers: () => ({
+      data: [],
+      error: null,
+      isLoading: true,
+      isNextPageLoading: false,
+      nextPageError: null,
     }),
-    fetchUsersError: (state, action: PayloadAction<null | string>) => ({
+    fetchUsersSuccess: (state, { payload }: PayloadAction<User[]>) => ({
       ...state,
       isLoading: false,
-      error: action.payload,
+      data: [...state.data, ...payload],
+      nextPageError: null,
+    }),
+    fetchUsersError: (state, { payload }: PayloadAction<null | string>) => ({
+      ...state,
+      isLoading: false,
+      error: payload,
+      isNextPageLoading: false,
     }),
     fetchNextPageUsers: state => ({
       ...state,
+      isLoading: false,
+      error: null,
       isNextPageLoading: true,
+      nextPageError: null,
+    }),
+    fetchNextPageUsersError: (
+      state,
+      { payload }: PayloadAction<null | string>
+    ) => ({
+      ...state,
+      isLoading: false,
+      error: null,
+      isNextPageLoading: true,
+      nextPageError: payload,
     }),
   },
 });

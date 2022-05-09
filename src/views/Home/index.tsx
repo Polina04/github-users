@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!data?.length) dispatch(fetchUsers());
-  }, [data]);
+  }, [data.length]);
 
   return (
     <>

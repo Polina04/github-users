@@ -18,7 +18,6 @@ export function* fetchUsersWorker() {
   } catch (error) {
     if (error instanceof Error) {
       yield put(fetchUsersError(error.message));
-      return;
     }
   }
 }
@@ -34,7 +33,6 @@ export function* fetchNextPageUsersWorker() {
   } catch (error) {
     if (error instanceof Error) {
       yield put(fetchUsersError(error.message));
-      return;
     }
   }
 }

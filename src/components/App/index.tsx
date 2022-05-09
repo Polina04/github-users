@@ -10,14 +10,24 @@ import { Paths } from 'constants/routes';
 
 import './index.css';
 
-const App = () => (
-  <Routes>
-    <Route path={Paths.index} element={<PageContainer />}>
-      <Route index element={<Home />} />
-      <Route path={Paths.user} element={<User />} />
-      <Route path={Paths.info} element={<Info />} />
-    </Route>
-  </Routes>
-);
+const App = () => {
+  if (!process.env.REACT_APP_GITHUB_TOKEN) {
+    console.log(
+      'You have to provide your Git Hub API key for running this app.'
+    );
+
+    return null;
+  }
+
+  return (
+    <Routes>
+      <Route path={Paths.index} element={<PageContainer />}>
+        <Route index element={<Home />} />
+        <Route path={Paths.user} element={<User />} />
+        <Route path={Paths.info} element={<Info />} />
+      </Route>
+    </Routes>
+  );
+};
 
 export default App;

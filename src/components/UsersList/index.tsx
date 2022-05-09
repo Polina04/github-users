@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import StyledLink from '@mui/material/Link';
 import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
 
 import type { User } from 'types/models';
 
@@ -25,7 +26,7 @@ type Props = { users: User[] };
 const UsersList = ({ users }: Props) => {
   const loadMoreRef = useRef(null);
   const dispatch = useDispatch();
-  const { isNextPageLoading } = useSelector(selectUsers);
+  const { isNextPageLoading, nextPageError } = useSelector(selectUsers);
 
   useObserver(loadMoreRef, isIntersect => {
     if (isIntersect) dispatch(fetchNextPageUsers());
@@ -74,6 +75,8 @@ const UsersList = ({ users }: Props) => {
           <CircularProgress />
         </div>
       )}
+      {nextPageError && <Alert severity="error">{nextPageError}</Alert>}
+
       <div ref={loadMoreRef} />
     </>
   );

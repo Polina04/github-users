@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 
 import { usersReducer } from 'redux/slices/users';
@@ -13,7 +13,8 @@ const store = configureStore({
     users: usersReducer,
     user: userReducer,
   },
-  middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(saga);
